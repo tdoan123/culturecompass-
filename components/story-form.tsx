@@ -1,0 +1,158 @@
+'use client'
+
+import { useState } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { ScrollArea } from '@/components/ui/scroll-area'
+
+interface StoryFormProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}
+
+export function StoryForm({ open, onOpenChange }: StoryFormProps) {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    location: '',
+    title: '',
+    shortDescription: '',
+    story: '',
+    videoUrl: '',
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('[v0] Story form submitted:', formData)
+    // TODO: Save to database (Supabase/Firebase/etc.)
+    onOpenChange(false)
+    setFormData({
+      firstName: '',
+      lastName: '',
+      location: '',
+      title: '',
+      shortDescription: '',
+      story: '',
+      videoUrl: '',
+    })
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl max-h-[90vh] p-0 gap-0 overflow-hidden">
+        <DialogHeader className="px-6 pt-6 pb-4 border-b border-border">
+          <DialogTitle className="text-2xl font-bold">Share Your Cultural Story</DialogTitle>
+          <DialogDescription>
+            Share your indigenous culture and experiences with the world
+          </DialogDescription>
+        </DialogHeader>
+
+        <ScrollArea className="h-[600px]">
+          <form onSubmit={handleSubmit} className="p-6 space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name *</Label>
+                <Input
+                  id="firstName"
+                  required
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name *</Label>
+                <Input
+                  id="lastName"
+                  required
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="location">Location of Story Origin *</Label>
+              <Input
+                id="location"
+                placeholder="e.g., Vancouver, Canada or Navajo Nation"
+                required
+                value={formData.location}
+                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="title">Title of Story *</Label>
+              <Input
+                id="title"
+                required
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="shortDescription">Short Description (50 characters max) *</Label>
+              <Input
+                id="shortDescription"
+                maxLength={50}
+                required
+                value={formData.shortDescription}
+                onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                {formData.shortDescription.length}/50 characters
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="story">Your Story (max 500 words)</Label>
+              <Textarea
+                id="story"
+                rows={8}
+                placeholder="Share your cultural story, traditions, or experiences..."
+                value={formData.story}
+                onChange={(e) => setFormData({ ...formData, story: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                {formData.story.split(/\s+/).filter(Boolean).length}/500 words
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="videoUrl">Or provide a Video URL (optional)</Label>
+              <Input
+                id="videoUrl"
+                type="url"
+                placeholder="https://www.youtube.com/watch?v=..."
+                value={formData.videoUrl}
+                onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                YouTube, Vimeo, or other video platform links
+              </p>
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <Button type="submit" className="flex-1">
+                Submit Story
+              </Button>
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+                Cancel
+              </Button>
+            </div>
+          </form>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
+  )
+}

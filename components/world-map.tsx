@@ -1,9 +1,13 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { PlusCircle } from 'lucide-react'
 
 interface WorldMapProps {
   onSelectPeople: (id: string) => void
+  onOpenStoryForm: () => void
+  onOpenEventForm: () => void
+  onOpenContactForm: () => void
 }
 
 const indigenousPeoples = [
@@ -69,7 +73,7 @@ const indigenousPeoples = [
   },
 ]
 
-export function WorldMap({ onSelectPeople }: WorldMapProps) {
+export function WorldMap({ onSelectPeople, onOpenStoryForm, onOpenEventForm, onOpenContactForm }: WorldMapProps) {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-muted/30 via-background to-muted/20">
@@ -122,6 +126,35 @@ export function WorldMap({ onSelectPeople }: WorldMapProps) {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 z-20">
+        <Button
+          onClick={onOpenStoryForm}
+          size="lg"
+          className="bg-primary hover:bg-primary/90 shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-105 min-w-[240px]"
+        >
+          <PlusCircle className="mr-2 h-5 w-5" />
+          Share Your Story
+        </Button>
+        <Button
+          onClick={onOpenEventForm}
+          size="lg"
+          variant="secondary"
+          className="shadow-2xl hover:shadow-secondary/50 transition-all duration-300 hover:scale-105 min-w-[240px]"
+        >
+          <PlusCircle className="mr-2 h-5 w-5" />
+          Post Cultural Event
+        </Button>
+        <Button
+          onClick={onOpenContactForm}
+          size="lg"
+          variant="outline"
+          className="shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105 min-w-[240px] bg-card/95 backdrop-blur-sm"
+        >
+          <PlusCircle className="mr-2 h-5 w-5" />
+          Create Profile
+        </Button>
       </div>
 
       <div className="absolute bottom-8 left-8 bg-card/95 backdrop-blur-sm border border-border rounded-xl p-6 shadow-2xl max-w-xs">
