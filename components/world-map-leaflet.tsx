@@ -127,6 +127,9 @@ export function WorldMapLeaflet({
       <MapContainer
         center={[20, 0]}
         zoom={3}
+        minZoom={2}
+        maxBounds={[[-90, -180], [90, 180]]}
+        maxBoundsViscosity={1.0}
         style={{ height: '100%', width: '100%' }}
         className="z-0"
       >
