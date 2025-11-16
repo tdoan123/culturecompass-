@@ -6,10 +6,8 @@ import { InfoModal } from '@/components/info-modal'
 import { StoryForm } from '@/components/story-form'
 import { EventForm } from '@/components/event-form'
 import { ContactForm } from '@/components/contact-form'
-import { CultureCompassHeader } from '@/components/culture-compass-header'
-import { HeroSection } from '@/components/hero-section'
 import { Button } from '@/components/ui/button'
-import { BookOpen, Calendar, Users } from 'lucide-react'
+import { BookOpen, Calendar, Users, ArrowRight } from 'lucide-react'
 
 export interface Story {
   id: string
@@ -163,44 +161,51 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background">
-      <CultureCompassHeader />
-      <HeroSection />
-      
-      <header className="bg-gradient-to-b from-background/95 to-background/0 backdrop-blur-sm">
+      {/* Navigation Bar */}
+      <nav className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="container mx-auto flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-foreground tracking-tight">
-            WorldMap
+          {/* Left: CultureCompass Logo */}
+          <h1 className="text-2xl font-bold text-gray-900">
+            CultureCompass
           </h1>
-          <div className="flex gap-4">
-            <Button
-              onClick={() => setStoryFormOpen(true)}
-              variant="default"
-              size="default"
-            >
-              <BookOpen className="mr-2 h-4 w-4" />
-              Stories
-            </Button>
-            <Button
-              onClick={() => setEventFormOpen(true)}
-              variant="default"
-              size="default"
-            >
-              <Calendar className="mr-2 h-4 w-4" />
-              Events
-            </Button>
-            <Button
-              onClick={() => setContactFormOpen(true)}
-              variant="default"
-              size="default"
-            >
-              <Users className="mr-2 h-4 w-4" />
-              People
-            </Button>
+
+          {/* Right: Call to Action and Buttons */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-gray-700">
+              <span className="font-medium">Add your own compass</span>
+              <ArrowRight className="h-5 w-5" />
+            </div>
+            <div className="flex gap-3">
+              <Button
+                onClick={() => setStoryFormOpen(true)}
+                variant="default"
+                size="default"
+              >
+                <BookOpen className="mr-2 h-4 w-4" />
+                Stories
+              </Button>
+              <Button
+                onClick={() => setEventFormOpen(true)}
+                variant="default"
+                size="default"
+              >
+                <Calendar className="mr-2 h-4 w-4" />
+                Events
+              </Button>
+              <Button
+                onClick={() => setContactFormOpen(true)}
+                variant="default"
+                size="default"
+              >
+                <Users className="mr-2 h-4 w-4" />
+                People
+              </Button>
+            </div>
           </div>
         </div>
-      </header>
+      </nav>
 
-      <div style={{ marginTop: '32px' }}>
+      <div style={{ marginTop: '0px' }}>
         <WorldMapWrapper
           onSelectPeople={setSelectedPeople}
           onOpenStoryForm={() => setStoryFormOpen(true)}
