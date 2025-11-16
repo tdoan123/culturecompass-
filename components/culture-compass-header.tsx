@@ -9,11 +9,8 @@ export function CultureCompassHeader() {
           <span className="text-black font-semibold text-xl">CultureCompass</span>
         </div>
         <nav className="flex items-center gap-12">
-          <a href="#" className="text-black text-lg font-medium hover:text-[#c4a962] transition-colors">
+          <a href="/" className="text-black text-lg font-medium hover:text-[#c4a962] transition-colors">
             Home
-          </a>
-          <a href="#" className="text-black text-lg font-medium hover:text-[#c4a962] transition-colors">
-            Submission
           </a>
         </nav>
       </div>

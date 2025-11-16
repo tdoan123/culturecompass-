@@ -151,7 +151,7 @@ export function WorldMap({
           } backdrop-blur-sm shadow-lg`}
         >
           <BookOpen className="mr-2 h-4 w-4" />
-          Show1
+          Show Stories
         </Button>
         <Button
           size="sm"
@@ -163,7 +163,7 @@ export function WorldMap({
           } backdrop-blur-sm shadow-lg text-white`}
         >
           <Calendar className="mr-2 h-4 w-4" />
-          Show2
+          Show Events
         </Button>
         <Button
           size="sm"
@@ -175,7 +175,7 @@ export function WorldMap({
           } backdrop-blur-sm shadow-lg text-white`}
         >
           <Users className="mr-2 h-4 w-4" />
-          Show3
+          Show People
         </Button>
       </div>
 
