@@ -132,21 +132,23 @@ export default function Home() {
         </div>
       </header>
 
-      <WorldMap
-        onSelectPeople={setSelectedPeople}
-        onOpenStoryForm={() => setStoryFormOpen(true)}
-        onOpenEventForm={() => setEventFormOpen(true)}
-        onOpenContactForm={() => setContactFormOpen(true)}
-        stories={stories}
-        showStoryPins={showStoryPins}
-        onToggleStoryPins={() => setShowStoryPins(!showStoryPins)}
-        events={events}
-        showEventPins={showEventPins}
-        onToggleEventPins={() => setShowEventPins(!showEventPins)}
-        people={people}
-        showPeoplePins={showPeoplePins}
-        onTogglePeoplePins={() => setShowPeoplePins(!showPeoplePins)}
-      />
+      <div style={{ marginTop: '32px' }}>
+        <WorldMap
+          onSelectPeople={setSelectedPeople}
+          onOpenStoryForm={() => setStoryFormOpen(true)}
+          onOpenEventForm={() => setEventFormOpen(true)}
+          onOpenContactForm={() => setContactFormOpen(true)}
+          stories={stories}
+          showStoryPins={showStoryPins}
+          onToggleStoryPins={() => setShowStoryPins(!showStoryPins)}
+          events={events}
+          showEventPins={showEventPins}
+          onToggleEventPins={() => setShowEventPins(!showEventPins)}
+          people={people}
+          showPeoplePins={showPeoplePins}
+          onTogglePeoplePins={() => setShowPeoplePins(!showPeoplePins)}
+        />
+      </div>
 
       <InfoModal
         peopleId={selectedPeople}
