@@ -156,21 +156,6 @@ export function WorldMap({ onSelectPeople, onOpenStoryForm, onOpenEventForm, onO
           Create Profile
         </Button>
       </div>
-
-      <div className="absolute bottom-8 left-8 bg-card/95 backdrop-blur-sm border border-border rounded-xl p-6 shadow-2xl max-w-xs">
-        <h3 className="font-bold text-lg mb-3 text-card-foreground">How to Explore</h3>
-        <div className="space-y-3 text-sm text-muted-foreground">
-          <div className="flex items-center gap-3">
-            <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
-            </div>
-            <p>Click markers to view details</p>
-          </div>
-          <p className="text-xs leading-relaxed">
-            Each point contains videos, photos, audio, and rich cultural stories of indigenous peoples.
-          </p>
-        </div>
-      </div>
     </div>
   )
 }
