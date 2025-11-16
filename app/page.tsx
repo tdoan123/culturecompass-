@@ -8,6 +8,7 @@ import { EventForm } from '@/components/event-form'
 import { ContactForm } from '@/components/contact-form'
 import { CultureCompassHeader } from '@/components/culture-compass-header'
 import { HeroSection } from '@/components/hero-section'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
   const [selectedPeople, setSelectedPeople] = useState<string | null>(null)
@@ -21,13 +22,33 @@ export default function Home() {
       <HeroSection />
       
       <header className="bg-gradient-to-b from-background/95 to-background/0 backdrop-blur-sm py-6">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-foreground tracking-tight">
-            Indigenous Peoples World Map
+            WorldMap
           </h1>
-          <p className="text-muted-foreground mt-2 text-balance">
-            Click on the map points to explore cultures and stories of indigenous peoples around the world
-          </p>
+          <div className="flex gap-4">
+            <Button
+              onClick={() => setStoryFormOpen(true)}
+              variant="default"
+              size="default"
+            >
+              Stories
+            </Button>
+            <Button
+              onClick={() => setEventFormOpen(true)}
+              variant="default"
+              size="default"
+            >
+              Events
+            </Button>
+            <Button
+              onClick={() => setContactFormOpen(true)}
+              variant="default"
+              size="default"
+            >
+              People
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -37,7 +58,6 @@ export default function Home() {
         onOpenEventForm={() => setEventFormOpen(true)}
         onOpenContactForm={() => setContactFormOpen(true)}
       />
-
 
       <InfoModal
         peopleId={selectedPeople}
