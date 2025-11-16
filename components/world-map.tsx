@@ -64,7 +64,7 @@ export function WorldMap({
           <img
             src="/world-map-silhouette-dark-minimalist.jpg"
             alt="World Map"
-            className="h-full w-full object-cover mix-blend-soft-light"
+            className="h-full w-full object-contain mix-blend-soft-light"
           />
         </div>
       </div>
@@ -227,7 +227,7 @@ export function WorldMap({
               )}
 
               <div className="text-xs text-muted-foreground pt-4">
-                Posted on {selectedStory?.createdAt.toLocaleDateString()}
+                Posted on {selectedStory?.createdAt ? new Date(selectedStory.createdAt).toLocaleDateString() : ''}
               </div>
             </div>
           </ScrollArea>
@@ -285,7 +285,7 @@ export function WorldMap({
               )}
 
               <div className="text-xs text-muted-foreground pt-4">
-                Posted on {selectedEvent?.createdAt.toLocaleDateString()}
+                Posted on {selectedEvent?.createdAt ? new Date(selectedEvent.createdAt).toLocaleDateString() : ''}
               </div>
             </div>
           </ScrollArea>
@@ -335,7 +335,7 @@ export function WorldMap({
               )}
 
               <div className="text-xs text-muted-foreground pt-4">
-                Joined on {selectedPerson?.createdAt.toLocaleDateString()}
+                Joined on {selectedPerson?.createdAt ? new Date(selectedPerson.createdAt).toLocaleDateString() : ''}
               </div>
             </div>
           </ScrollArea>

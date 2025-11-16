@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { WorldMap } from '@/components/world-map'
+import { useState, useEffect } from 'react'
+import { WorldMapWrapper } from '@/components/world-map-wrapper'
 import { InfoModal } from '@/components/info-modal'
 import { StoryForm } from '@/components/story-form'
 import { EventForm } from '@/components/event-form'
@@ -62,35 +62,103 @@ export default function Home() {
   const [showEventPins, setShowEventPins] = useState(false)
   const [people, setPeople] = useState<Person[]>([])
   const [showPeoplePins, setShowPeoplePins] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const handleAddStory = (story: Omit<Story, 'id' | 'createdAt'>) => {
-    const newStory: Story = {
-      ...story,
-      id: `story-${Date.now()}`,
-      createdAt: new Date(),
+  // Fetch all data on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [storiesRes, eventsRes, peopleRes] = await Promise.all([
+          fetch('/api/stories'),
+          fetch('/api/events'),
+          fetch('/api/people'),
+        ])
+
+        const [storiesData, eventsData, peopleData] = await Promise.all([
+          storiesRes.json(),
+          eventsRes.json(),
+          peopleRes.json(),
+        ])
+
+        setStories(storiesData)
+        setEvents(eventsData)
+        setPeople(peopleData)
+      } catch (error) {
+        console.error('Failed to fetch data:', error)
+      } finally {
+        setIsLoading(false)
+      }
     }
-    setStories([...stories, newStory])
-    console.log('[v0] New story added:', newStory)
+
+    fetchData()
+  }, [])
+
+  const handleAddStory = async (story: Omit<Story, 'id' | 'createdAt'>) => {
+    try {
+      const response = await fetch('/api/stories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(story),
+      })
+
+      if (!response.ok) throw new Error('Failed to create story')
+
+      const newStory = await response.json()
+      setStories([newStory, ...stories])
+      console.log('New story added:', newStory)
+    } catch (error) {
+      console.error('Failed to add story:', error)
+      alert('Failed to add story. Please try again.')
+    }
   }
 
-  const handleAddEvent = (event: Omit<Event, 'id' | 'createdAt'>) => {
-    const newEvent: Event = {
-      ...event,
-      id: `event-${Date.now()}`,
-      createdAt: new Date(),
+  const handleAddEvent = async (event: Omit<Event, 'id' | 'createdAt'>) => {
+    try {
+      const response = await fetch('/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(event),
+      })
+
+      if (!response.ok) throw new Error('Failed to create event')
+
+      const newEvent = await response.json()
+      setEvents([newEvent, ...events])
+      console.log('New event added:', newEvent)
+    } catch (error) {
+      console.error('Failed to add event:', error)
+      alert('Failed to add event. Please try again.')
     }
-    setEvents([...events, newEvent])
-    console.log('[v0] New event added:', newEvent)
   }
 
-  const handleAddPerson = (person: Omit<Person, 'id' | 'createdAt'>) => {
-    const newPerson: Person = {
-      ...person,
-      id: `person-${Date.now()}`,
-      createdAt: new Date(),
+  const handleAddPerson = async (person: Omit<Person, 'id' | 'createdAt'>) => {
+    try {
+      const response = await fetch('/api/people', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(person),
+      })
+
+      if (!response.ok) throw new Error('Failed to create person')
+
+      const newPerson = await response.json()
+      setPeople([newPerson, ...people])
+      console.log('New person added:', newPerson)
+    } catch (error) {
+      console.error('Failed to add person:', error)
+      alert('Failed to add person. Please try again.')
     }
-    setPeople([...people, newPerson])
-    console.log('[v0] New person added:', newPerson)
+  }
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </main>
+    )
   }
 
   return (
@@ -133,7 +201,7 @@ export default function Home() {
       </header>
 
       <div style={{ marginTop: '32px' }}>
-        <WorldMap
+        <WorldMapWrapper
           onSelectPeople={setSelectedPeople}
           onOpenStoryForm={() => setStoryFormOpen(true)}
           onOpenEventForm={() => setEventFormOpen(true)}
@@ -149,6 +217,35 @@ export default function Home() {
           onTogglePeoplePins={() => setShowPeoplePins(!showPeoplePins)}
         />
       </div>
+
+      {/* About Section */}
+      <section className="bg-white py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            OUR MISSION
+          </h2>
+
+          <div className="space-y-6 text-gray-700 leading-relaxed">
+            <p className="text-lg">
+              Compasses have helped explorers adventure the world for centuries, but it's peoples cultural compasses that guide them through their lives.
+            </p>
+
+            <p>
+              The world has so much to share, but cultural stories and connections can get lost in the noise of everything else. People need a platform focused on connecting users who want to learn about the world and the cultures within it. <span className="font-semibold text-gray-900">CultureCompass is here to guide you!</span>
+            </p>
+
+            <p>
+              CultureCompass is a community-driven platform with a mission to help people build their knowledge of the Indigenous cultures in their area and around the world. Our interactive maps allow people to explore stories through video or text, discover events to attend in their area, and find people who want to form connections through cultural conversations.
+            </p>
+
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mt-8">
+              <p className="text-gray-800">
+                <span className="font-semibold">Our Commitment:</span> Our team reviews and approves all submitted content before it's uploaded to the maps. We strive to maintain authenticity and respect for all cultures and their knowledge. CultureCompass is a platform for educational purposes, and all content should be treated as such with the utmost respect.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <InfoModal
         peopleId={selectedPeople}
@@ -166,11 +263,48 @@ export default function Home() {
         onOpenChange={setEventFormOpen}
         onSubmit={handleAddEvent}
       />
-      <ContactForm 
-        open={contactFormOpen} 
+      <ContactForm
+        open={contactFormOpen}
         onOpenChange={setContactFormOpen}
         onSubmit={handleAddPerson}
       />
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300 py-12 px-4 mt-auto">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {/* Left Column - Branding */}
+            <div className="flex flex-col justify-center">
+              <h3 className="text-2xl font-bold text-white mb-2">CultureCompass</h3>
+              <p className="text-sm text-gray-400">Connecting Cultures, Sharing Stories</p>
+            </div>
+
+            {/* Middle and Right columns can be used for additional content */}
+            <div className="md:col-span-2">
+              {/* Hackathon Disclaimer */}
+              <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-6">
+                <p className="text-sm text-amber-200 text-center">
+                  <span className="font-semibold">Hackathon Demo Notice:</span> For our hackathon purpose, all events, people, and stories are AI-generated to illustrate the content and interactive features of the platform.
+                </p>
+              </div>
+
+              <div className="text-sm leading-relaxed text-gray-400 space-y-4">
+                <p>
+                  CultureCompass is a platform for people around the world to connect and share their cultures digitally. CultureCompass does not create content. All rights to the content on CultureCompass belong to its creators and communities, and are to be used for educational purposes only.
+                </p>
+
+                <p>
+                  Users are responsible for how they engage on CultureCompass. All submitted content is reviewed and approved by the CultureCompass team before being uploaded to the platform.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t border-gray-800 text-center text-xs text-gray-500">
+            <p>&copy; {new Date().getFullYear()} CultureCompass. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }
