@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: '世界先住民族マップ - Indigenous Peoples World Map',
-  description: '世界中の先住民族の文化とストーリーを地図から直感的に学べるインタラクティブWebサイト',
+  title: 'CultureCompass - Connecting Cultures, Sharing Stories',
+  description: 'An interactive platform connecting people worldwide to share Indigenous cultures, stories, and events through an interactive map.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
