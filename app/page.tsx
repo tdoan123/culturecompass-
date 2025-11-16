@@ -165,7 +165,7 @@ export default function Home() {
       <nav className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="container mx-auto flex items-center justify-between">
           {/* Left: CultureCompass Logo */}
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-4xl font-bold text-gray-900">
             CultureCompass
           </h1>
 

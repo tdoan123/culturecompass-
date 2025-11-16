@@ -79,14 +79,14 @@ export function WorldMapLeaflet({
 
   if (!mounted) {
     return (
-      <div className="h-screen w-full flex items-center justify-center bg-muted/20">
+      <div className="h-[80vh] w-full flex items-center justify-center bg-muted/20">
         <p className="text-muted-foreground">Loading map...</p>
       </div>
     )
   }
 
   return (
-    <div className="relative h-screen w-full">
+    <div className="relative h-[80vh] w-full">
       {/* Control buttons */}
       <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2 bg-background/95 backdrop-blur-sm p-4 rounded-lg shadow-lg border">
         <button

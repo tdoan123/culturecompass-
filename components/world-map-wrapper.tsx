@@ -25,7 +25,7 @@ const WorldMapLeaflet = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-screen w-full flex items-center justify-center bg-muted/20">
+      <div className="h-[80vh] w-full flex items-center justify-center bg-muted/20">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading interactive map...</p>
