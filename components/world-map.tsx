@@ -15,61 +15,61 @@ const indigenousPeoples = [
     id: 'ainu',
     name: 'Ainu People',
     region: 'Hokkaido, Japan',
-    position: { x: 85, y: 35 },
+    position: { x: 82, y: 32 },
   },
   {
     id: 'maori',
     name: 'Māori People',
     region: 'New Zealand',
-    position: { x: 95, y: 85 },
+    position: { x: 92, y: 82 },
   },
   {
     id: 'navajo',
     name: 'Navajo Nation',
     region: 'Southwestern United States',
-    position: { x: 15, y: 35 },
+    position: { x: 18, y: 33 },
   },
   {
     id: 'sami',
     name: 'Sámi People',
     region: 'Northern Europe',
-    position: { x: 52, y: 15 },
+    position: { x: 52, y: 18 },
   },
   {
     id: 'aboriginal',
     name: 'Aboriginal Australians',
     region: 'Australia',
-    position: { x: 88, y: 75 },
+    position: { x: 84, y: 72 },
   },
   {
     id: 'inuit',
     name: 'Inuit',
     region: 'Arctic Region',
-    position: { x: 25, y: 10 },
+    position: { x: 28, y: 12 },
   },
   {
     id: 'maya',
     name: 'Maya People',
     region: 'Mexico & Central America',
-    position: { x: 18, y: 45 },
+    position: { x: 20, y: 42 },
   },
   {
     id: 'masai',
     name: 'Maasai People',
     region: 'East Africa',
-    position: { x: 58, y: 60 },
+    position: { x: 56, y: 58 },
   },
   {
     id: 'karen',
     name: 'Karen People',
     region: 'Thailand & Myanmar',
-    position: { x: 75, y: 48 },
+    position: { x: 74, y: 44 },
   },
   {
     id: 'quechua',
     name: 'Quechua People',
     region: 'Andes Mountains',
-    position: { x: 25, y: 65 },
+    position: { x: 26, y: 62 },
   },
 ]
 
@@ -92,41 +92,6 @@ export function WorldMap({ onSelectPeople, onOpenStoryForm, onOpenEventForm, onO
       </div>
 
       {/* Indigenous peoples markers */}
-      <div className="absolute inset-0">
-        {indigenousPeoples.map((people) => (
-          <div
-            key={people.id}
-            className="absolute group"
-            style={{
-              left: `${people.position.x}%`,
-              top: `${people.position.y}%`,
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            {/* Pulse effect */}
-            <div className="absolute inset-0 animate-ping">
-              <div className="h-8 w-8 rounded-full bg-primary/30" />
-            </div>
-
-            {/* Marker button */}
-            <Button
-              onClick={() => onSelectPeople(people.id)}
-              size="sm"
-              className="relative h-8 w-8 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-primary-foreground/20"
-            >
-              <span className="sr-only">{people.name}</span>
-              <div className="h-2 w-2 rounded-full bg-primary-foreground" />
-            </Button>
-
-            <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-              <div className="bg-card text-card-foreground px-4 py-2 rounded-lg shadow-xl border border-border whitespace-nowrap">
-                <p className="font-semibold text-sm">{people.name}</p>
-                <p className="text-xs text-muted-foreground">{people.region}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 z-20">
         <Button
