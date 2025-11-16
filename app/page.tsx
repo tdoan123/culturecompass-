@@ -17,11 +17,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background">
-      // Added CultureCompass header and hero section at the top
       <CultureCompassHeader />
       <HeroSection />
       
-      // Updated header to be non-absolute and repositioned
       <header className="bg-gradient-to-b from-background/95 to-background/0 backdrop-blur-sm py-6">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold text-foreground tracking-tight">

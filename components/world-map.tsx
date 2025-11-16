@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { PlusCircle } from 'lucide-react'
+import { PlusCircle, Users, BookOpen, Calendar } from 'lucide-react'
 
 interface WorldMapProps {
   onSelectPeople: (id: string) => void
@@ -76,6 +76,7 @@ const indigenousPeoples = [
 export function WorldMap({ onSelectPeople, onOpenStoryForm, onOpenEventForm, onOpenContactForm }: WorldMapProps) {
   return (
     <div className="relative h-screen w-full overflow-hidden">
+      {/* Map background - full width */}
       <div className="absolute inset-0 bg-gradient-to-br from-muted/30 via-background to-muted/20">
         <div className="absolute inset-0 opacity-20">
           <img
@@ -92,33 +93,30 @@ export function WorldMap({ onSelectPeople, onOpenStoryForm, onOpenEventForm, onO
       </div>
 
       {/* Indigenous peoples markers */}
-
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 z-20">
+      <div className="absolute right-6 top-6 flex flex-col gap-3 z-20">
+        <Button
+          onClick={onOpenContactForm}
+          size="sm"
+          className="bg-primary/80 hover:bg-primary backdrop-blur-sm shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
+        >
+          <Users className="mr-2 h-4 w-4" />
+          PEOPLE
+        </Button>
         <Button
           onClick={onOpenStoryForm}
-          size="lg"
-          className="bg-primary hover:bg-primary/90 shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-105 min-w-[240px]"
+          size="sm"
+          className="bg-secondary/80 hover:bg-secondary backdrop-blur-sm shadow-lg hover:shadow-secondary/30 transition-all duration-300 hover:scale-105"
         >
-          <PlusCircle className="mr-2 h-5 w-5" />
-          Share Your Story
+          <BookOpen className="mr-2 h-4 w-4" />
+          STORY
         </Button>
         <Button
           onClick={onOpenEventForm}
-          size="lg"
-          variant="secondary"
-          className="shadow-2xl hover:shadow-secondary/50 transition-all duration-300 hover:scale-105 min-w-[240px]"
+          size="sm"
+          className="bg-accent/80 hover:bg-accent backdrop-blur-sm shadow-lg hover:shadow-accent/30 transition-all duration-300 hover:scale-105"
         >
-          <PlusCircle className="mr-2 h-5 w-5" />
-          Post Cultural Event
-        </Button>
-        <Button
-          onClick={onOpenContactForm}
-          size="lg"
-          variant="outline"
-          className="shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105 min-w-[240px] bg-card/95 backdrop-blur-sm"
-        >
-          <PlusCircle className="mr-2 h-5 w-5" />
-          Create Profile
+          <Calendar className="mr-2 h-4 w-4" />
+          EVENT
         </Button>
       </div>
     </div>
