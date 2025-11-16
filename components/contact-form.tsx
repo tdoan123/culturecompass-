@@ -53,7 +53,7 @@ export function ContactForm({ open, onOpenChange }: ContactFormProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[85vh] p-0 gap-0 overflow-hidden flex flex-col">
+      <DialogContent className="max-w-2xl h-[90vh] p-0 gap-0 overflow-hidden flex flex-col">
         <DialogHeader className="px-6 pt-6 pb-4 border-b border-border shrink-0">
           <DialogTitle className="text-2xl font-bold">Create Your Profile</DialogTitle>
           <DialogDescription>
@@ -61,7 +61,7 @@ export function ContactForm({ open, onOpenChange }: ContactFormProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="flex-1 px-6">
+        <ScrollArea className="flex-1 px-6 overflow-auto">
           <div className="py-6 space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -143,16 +143,18 @@ export function ContactForm({ open, onOpenChange }: ContactFormProps) {
           </div>
         </ScrollArea>
 
-        <form onSubmit={handleSubmit} className="px-6 py-4 border-t border-border shrink-0">
-          <div className="flex gap-3">
-            <Button type="submit" className="flex-1">
-              Create Profile
-            </Button>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
-            </Button>
-          </div>
-        </form>
+        <div className="px-6 py-4 border-t border-border shrink-0 bg-background">
+          <form onSubmit={handleSubmit}>
+            <div className="flex gap-3">
+              <Button type="submit" className="flex-1">
+                Create Profile
+              </Button>
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+                Cancel
+              </Button>
+            </div>
+          </form>
+        </div>
       </DialogContent>
     </Dialog>
   )
