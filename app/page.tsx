@@ -57,11 +57,11 @@ export default function Home() {
   const [eventFormOpen, setEventFormOpen] = useState(false)
   const [contactFormOpen, setContactFormOpen] = useState(false)
   const [stories, setStories] = useState<Story[]>([])
-  const [showStoryPins, setShowStoryPins] = useState(false)
+  const [showStoryPins, setShowStoryPins] = useState(true)
   const [events, setEvents] = useState<Event[]>([])
-  const [showEventPins, setShowEventPins] = useState(false)
+  const [showEventPins, setShowEventPins] = useState(true)
   const [people, setPeople] = useState<Person[]>([])
-  const [showPeoplePins, setShowPeoplePins] = useState(false)
+  const [showPeoplePins, setShowPeoplePins] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
 
   // Fetch all data on component mount
